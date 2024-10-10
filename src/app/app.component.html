@@ -1,27 +1,42 @@
 <div class="container">
   <div class="pokemon-tables">
-    <button class="pokemon-button" (click)="navigateToNewPage(showTable)">Pokemon Tables</button>
+    <button class="pokemon-button" (click)="navigateToNewPage()">
+      Pokemon Tables
+    </button>
   </div>
 </div>
 <div *ngIf="!showTable">
-  <div *ngFor="let item of data">
-    <h2>{{ item.title }}</h2>
-    <p>{{ item.body }}</p>
-  </div>
+  <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
+    <div *cdkVirtualFor="let item of data" class="item">
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.body }}</p>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>
+
 <div *ngIf="showTable">
-<button class="download-button" (click)="download()">Download CSV</button>
+  <button class="download-button" (click)="download()">Download CSV</button>
 
   <h1>Pokémon Table</h1>
-
-  <ngx-datatable class="bootstrap" [rows]="rows" [columns]="[
-    { prop: 'name', name: 'Name' },
-    { prop: 'height', name: 'Height' },
-    { prop: 'weight', name: 'Weight' },
-    { prop: 'rank', name: 'Rank' }
-  ]" [headerHeight]="50" [rowHeight]="'auto'" [limit]="50" (activate)="onActivate($event)">
-  </ngx-datatable>
+  <div *ngIf="rows && rows.length > 0">
+    <ngx-datatable
+      class="bootstrap"
+      [rows]="rows"
+      [columns]="[
+        { prop: 'name', name: 'Name' },
+        { prop: 'height', name: 'Height' },
+        { prop: 'weight', name: 'Weight' },
+        { prop: 'rank', name: 'Rank' },
+      ]"
+      [headerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="50"
+      (activate)="onActivate($event)"
+    >
+    </ngx-datatable>
+  </div>
+  <div *ngIf="rows && rows.length === 0">Loading data...</div>
 </div>
-<div class="timer" style="background-color: lightgray;">
+<div class="timer" style="background-color: lightgray">
   <p>Time spent in app: {{ timeSpentInApp }}</p>
 </div>

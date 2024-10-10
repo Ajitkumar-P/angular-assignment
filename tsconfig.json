@@ -20,17 +20,12 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "downlevelIteration": true,
     "baseUrl": "src",
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
